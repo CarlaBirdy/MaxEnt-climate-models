@@ -14,6 +14,6 @@ MaxEnt models were projected onto the future climate scenarios SPP1-RCP2.6, SSP2
 R statistical software was used to write one shell file per specie. Species shell files were then run on a high performace cluster. The majority of this analysis was submitted to a Linux (virtural machine) cluster computer using a SLURM Queue Manager. Each Server Node has: E5-2680v3 @2.50Ghz (or slightly better), 12 Cores, 70Gb.
 
 ## Key References
-1.Elith, J. et al. (2011) ‘A statistical explanation of MaxEnt for ecologists’, Diversity and Distributions, 17(1), pp. 43–57. doi: 10.1111/j.1472-4642.2010.00725.x.
-2. Graham, E. M. et al. (2019) ‘Climate change and biodiversity in Australia: a systematic modelling approach to nationwide species distributions’, Australasian Journal of Environmental Management. Taylor & Francis, 26(2), pp. 112–123. doi: 10.1080/14486563.2019.1599742.
-3. Phillips, S. B. et al. (2006) ‘Maximum entropy modeling of species geographic distributions’, Ecological Modelling, 6(2–3), pp. 231–252. doi: 10.1016/j.ecolmodel.2005.03.026.
+ Markup : 1.Elith, J. et al. (2011) ‘A statistical explanation of MaxEnt for ecologists’, Diversity and Distributions, 17(1), pp. 43–57. doi: 10.1111/j.1472-4642.2010.00725.x.
+          2. Graham, E. M. et al. (2019) ‘Climate change and biodiversity in Australia: a systematic modelling approach to nationwide species distributions’, Australasian Journal of Environmental Management. Taylor & Francis, 26(2), pp. 112–123. doi: 10.1080/14486563.2019.1599742.
+          3. Phillips, S. B. et al. (2006) ‘Maximum entropy modeling of species geographic distributions’, Ecological Modelling, 6(2–3), pp. 231–252. doi: 10.1016/j.ecolmodel.2005.03.026.
