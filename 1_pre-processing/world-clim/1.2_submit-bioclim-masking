@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+#SBATCH --job-name="bioclim_masking"
+#SBATCH --output=/home/archibaldc/Documents/Species-Distribution-Modelling/Script/sdm_projections/scripts/WorldClim/jobx_files/jobx-stdout-%j.txt
+#SBATCH --error=/home/archibaldc/Documents/Species-Distribution-Modelling/Script/sdm_projections/scripts/WorldClim/jobx_files/jobx-stderr-%j.txt
+
+cd /home/archibaldc/Documents/Species-Distribution-Modelling/Script/sdm_projections/scripts/WorldClim/shell_files
+SLIST=$(<bioclim_shellfiles.txt) # list of shell files
+
+for fname in $SLIST; do 
+        sbatch --mem=5000 --time=01:30:00 --output=/home/archibaldc/Documents/Species-Distribution-Modelling/Script/sdm_projections/scripts/WorldClim/jobx_files/jobx-stdlog-%j.log "$fname"
+done
