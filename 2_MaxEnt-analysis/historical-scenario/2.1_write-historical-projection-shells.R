@@ -1,7 +1,7 @@
 ####################################################################################
 #
 # Shell file creation for MaxEnt projections using current 1990 climate data
-# this script utilises pre-masked bioclim layers.
+# this script utilizes pre-masked bioclim layers.
 #    By: Dr Carla Archibald with initial assistance from Yew Wen Mak. This script is based on 
 #        Dr Erin Graham's code that can be found in this repository: jcu_sdm_model_origin.R
 #    Start Date:    4/09/2020
@@ -102,4 +102,4 @@ for (taxon in taxa) {
   write.table(shellfiles_verts_list, file = paste0(shell_dir,"/sdm_verts_shellfiles.txt"), sep = "\t", row.names=FALSE, col.names=FALSE, quote = FALSE)
   write.table(shellfiles_plants_list, file = paste0(shell_dir,"/sdm_plants_shellfiles.txt"), sep = "\t", row.names=FALSE, col.names=FALSE, quote = FALSE)
 
-# End script :) 
+# END :) 

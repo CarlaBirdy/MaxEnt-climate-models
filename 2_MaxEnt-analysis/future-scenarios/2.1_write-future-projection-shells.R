@@ -5,7 +5,7 @@
 #    By: Dr Carla Archibald. This script is based on 
 #        Dr Erin Graham's code that can be found in this repository: jcu_sdm_model_origin.R
 #    Start Date:    26/11/2020
-#    Last Modified: 4/12/2020
+#    Last Modified: 4/12/2021
 #    Method: Parent script that: 
 #            1) Writes shell scripts containing MAXENT java command for each future climate scenario.
 #            2) Transforms .asc file to .gtiff and deleted asc file. 
@@ -58,20 +58,20 @@ for (taxon in taxa) {
          cat('module load gdal', "\n", file=shellfile)
 
     for (pr in future_scenarios) {
-      # set output file name for MaxEnt projection
+         # set output file name for MaxEnt projection
          outfilename = paste0(sp_wd,  "/", basename(sp),"_",basename(pr),"_5x5") 
          # MaxEnt projection java command
-         # cat('java -cp ',maxent_jar, ' density.Project ',sp_wd,'/',sp,'.lambdas ',' ',pr, '/',' ', outfilename,'_raw.asc nowriteclampgrid nowritemess fadebyclamping', "\n", sep="",file=shellfile)
+         cat('java -cp ',maxent_jar, ' density.Project ',sp_wd,'/',sp,'.lambdas ',' ',pr, '/',' ', outfilename,'_raw.asc nowriteclampgrid nowritemess fadebyclamping', "\n", sep="",file=shellfile)
          # convert .asc file to .tif file and compress
-         # cat('gdal_translate -of ','"GTiff" -co COMPRESS=LZW ', outfilename,'_raw.asc ', outfilename,'_raw.tif', "\n", sep="",file=shellfile)          
+         cat('gdal_translate -of ','"GTiff" -co COMPRESS=LZW ', outfilename,'_raw.asc ', outfilename,'_raw.tif', "\n", sep="",file=shellfile)          
          # remove .asc file, as it is too large... and not needed
-         # cat('rm ', outfilename,'_raw.asc', "\n",sep="",file=shellfile) # deletes .asc file
+         cat('rm ', outfilename,'_raw.asc', "\n",sep="",file=shellfile) # deletes .asc file
          # transforms climate suitability values from values between 0 and 1 to values between 0 to 100
          cat('gdal_calc.py --co="COMPRESS=LZW" -A ', outfilename,'_raw.tif --outfile ', outfilename,'_calc.tif --calc="A*100"',"\n", sep="",file=shellfile)
          # translates climate suitability values into a byte, much more efficient way to store the data
          cat('gdal_translate -of ','"GTiff" -co COMPRESS=LZW -ot Byte -a_nodata 255 ', outfilename,'_calc.tif ', outfilename,'_proc.tif', "\n", sep="",file=shellfile) 
          # remove the raw float raster
-         #cat('rm ', outfilename,'_raw.tif', "\n",sep="",file=shellfile)
+         cat('rm ', outfilename,'_raw.tif', "\n",sep="",file=shellfile)
          # remove the raw temp calc integer raster
          cat('rm ', outfilename,'_calc.tif', "\n",sep="",file=shellfile)
 
@@ -101,4 +101,4 @@ for (taxon in taxa) {
   write.table(shellfiles_verts_list, file = paste0(shell_dir,"/sdm_verts_shellfiles.txt"), sep = "\t", row.names=FALSE, col.names=FALSE, quote = FALSE)
   write.table(shellfiles_plants_list, file = paste0(shell_dir,"/sdm_plants_shellfiles.txt"), sep = "\t", row.names=FALSE, col.names=FALSE, quote = FALSE)
 
-# End script :) 
+# END :) 

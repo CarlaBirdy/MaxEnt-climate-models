@@ -1,9 +1,10 @@
 ####################################################################################
 #
-# Calculating habitat suitability ensemble across 9 GCMs
+# Calculating climate suitability ensemble across GCMs
 #    By: Carla Archibald
-#    Date: 5/10/2020
-#    Method: Need to average the habitat suitability prediction across all 8 GCMs for each Time period-SSP-Species combination. 
+#    Start Date:    5/10/2020
+#    Last Modified: 4/12/2021
+#    Method: Need to average the climate suitability prediction across all 8 GCMs for each Time period-SSP-Species combination. 
 #            This script will summarize the suitability maps by taking the deciles suitability across GCMs.
 #
 ####################################################################################
@@ -17,7 +18,6 @@ library(sf)
 
 # get the standard input here so I can use it below
 
-#sp_wd <- getwd() # this set in the .sh file to be the species working directory
 sp_wd <- getwd() # this set in the .sh file to be the species working directory
 root <- "/home/archibaldc/Documents/Species-Distribution-Modelling/Projections/NRM_lambdas/NRM/"
  
@@ -38,18 +38,20 @@ hsm_filepath <- as_tibble(list.files(sp_wd, pattern = "*0_5x5_proc*", full.names
                  mutate(yr_ssp = str_sub(source,-24,-14)) %>%
                  dplyr::select(yr_ssp, gcm, species, source)
 
-      yr_ssp <- unique(hsm_filepath$yr_ssp)
-      gcm <- unique(hsm_filepath$gcm)
-     # gcm_temp <- unique(hsm_filepath$gcm_temp)
-      species <- unique(hsm_filepath$species)
-      source <-hsm_filepath$source 
+# check strings
+yr_ssp <- unique(hsm_filepath$yr_ssp)
+gcm <- unique(hsm_filepath$gcm)
+species <- unique(hsm_filepath$species)
+source <-hsm_filepath$source 
 
-  rasterstack_meansd_slow <- function(x) {
-  mean <- round(raster::mean(x), digits = 0)
-  sd <- round(raster::calc(x, sd), digits = 0)
-  stack(mean ,sd)
-}
+# helper function
+rasterstack_meansd_slow <- function(x) {
+                              mean <- round(raster::mean(x), digits = 0)
+                              sd <- round(raster::calc(x, sd), digits = 0)
+                              stack(mean ,sd)
+                              }
 
+# start loop
 for (i in yr_ssp) {
   
   print(paste0("Calculating ensemble average for [",species,"] for [",i, "] climate scenario"))
@@ -67,12 +69,10 @@ for (i in yr_ssp) {
   NAvalue(ensemble_stack)<- 255
   
   # Calculate ensemble lower 95% bound 
-  
   ensemble_stack_low <- round(min(ensemble_stack))
   NAvalue(ensemble_stack_low)<- 255
   
   # Calculate ensemble upper 95% bound 
-  
   ensemble_stack_high <-  round(max(ensemble_stack))
   NAvalue(ensemble_stack_high)<- 255
   
@@ -81,5 +81,6 @@ for (i in yr_ssp) {
   writeRaster(ensemble_stack_high, paste0(sp_wd, "/",species,"_",i,"_5x5ensemblesMax"), bylayer=TRUE, dataType="INT1U", overwrite=TRUE, format="GTiff", options=c("COMPRESS=LZW"))  
   writeRaster(ensemble_stack_low, paste0(sp_wd, "/",species,"_",i,"_5x5ensemblesMin"), bylayer=TRUE, dataType="INT1U", overwrite=TRUE, format="GTiff", options=c("COMPRESS=LZW"))  
   
-  
 }
+
+# END :)
