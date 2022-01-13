@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+#SBATCH --job-name="mammal_refigia"
+#SBATCH --output=/home/archibaldc/Documents/Species-Distribution-Modelling/Script/sdm_projections/scripts/sdm_projections/jobx_files/jobx-stdout-%j.txt
+#SBATCH --error=/home/archibaldc/Documents/Species-Distribution-Modelling/Script/sdm_projections/scripts/sdm_projections/jobx_files/jobx-stderr-%j.txt
+
+cd /home/archibaldc/Documents/Species-Distribution-Modelling/Script/sdm_projections/scripts/sdm_projections/shell_files/climate_refugia
+
+SLIST=$(<refugia_amphibians_shellfiles.txt) # list of shell files
+
+for fname in $SLIST; do 
+        sbatch --cpus-per-task=1 --mem-per-cpu=3G --output=/home/archibaldc/Documents/Species-Distribution-Modelling/Script/sdm_projections/scripts/sdm_projections/jobx_files/jobx-stdlog-%j.log --time=03:00:00 "$fname"
+done
