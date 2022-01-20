@@ -110,7 +110,7 @@ def tabulate_summary(taxa_species):
         
             print('Beginning '+yr+' loop')
   
-        # 1. Absolute Number and Change in Climate Space	  
+        # 1. Report on the absolute area and change in climate space	  
         #      - Suitability (QWCNA)          
         #      - Absolute change in climate space
         #      - % change in climate space
@@ -154,7 +154,7 @@ def tabulate_summary(taxa_species):
             df_qwcna.at[index, (yr_label+' Proportional change in quality weighted climate space (mean) [%]')] = percChange
             
                       
-        # 2. For each species, climate refugia
+        # 2. Report on the absolute area and change in climate refugia	
         #      - Climate Refugia (Spatial areas that overlap)	         
         #      - Climate Refugia % (Spatial areas that overlap)	
                
@@ -173,7 +173,7 @@ def tabulate_summary(taxa_species):
           df_qwcna.at[index, ('1990-2100 Proportion of historical climate niche not overlaping with climate refugia (mean) [%]')] = 100-refugiaRasPerc
 
         
-        # 3. For each species, climate refugia
+        # 3. Report on areas where climate spaces has and has not impoved
         #      - Climate Gains        
         #      - Climate Losses % 
         
