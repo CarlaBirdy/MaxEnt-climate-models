@@ -1,6 +1,6 @@
 # !/bin/env python3
 #
-# def_create_summary_tablesy.py - to compile climate suitability reporting for species
+# def_create_summary_tables.py - to compile climate suitability reporting for species
 #
 # This functions reports on how climate change scenarios impact species available climate space and climate refugia
 #
